@@ -48,17 +48,18 @@ Plug 'whatyouhide/vim-gotham'
 Plug 'wadackel/vim-dogrun'
 Plug 'tomlion/vim-solidity'
 Plug 'maksimr/vim-jsbeautify'
+Plug 'dense-analysis/ale'
 call plug#end()
 
-set number 				"muestra los numeros de cada linea en la parte izquierda 
-set relativenumber 			"la distribucion de los numeros en lineas de manera relativa
-set mouse=a 				"permite la interaccion con el mouse
-set noshowmode				"me deja de mostrar el modo en el que estamos 'normal, insert, visual, etc'
-syntax enable 				"activa el coloreado de sintaxis en algunos tipos de archivos como html, c, c++
-set encoding=utf-8 			"permite setear la codificación de archivos para aceptar caracteres especiales
-set sw=4 				"la indentación genera 4 espacios
-"set nowrap				"el texto en una linea no baja a la siguiente, solo continua en la misma hasta el infinito.
-"set noswapfile				"para evitar el mensaje que sale al abrir algunos archivos sobre swap.
+set number              "muestra los numeros de cada linea en la parte izquierda 
+set relativenumber          "la distribucion de los numeros en lineas de manera relativa
+set mouse=a                 "permite la interaccion con el mouse
+set noshowmode              "me deja de mostrar el modo en el que estamos 'normal, insert, visual, etc'
+syntax enable               "activa el coloreado de sintaxis en algunos tipos de archivos como html, c, c++
+set encoding=utf-8          "permite setear la codificación de archivos para aceptar caracteres especiales
+set sw=4                "la indentación genera 4 espacios
+"set nowrap             "el texto en una linea no baja a la siguiente, solo continua en la misma hasta el infinito.
+"set noswapfile             "para evitar el mensaje que sale al abrir algunos archivos sobre swap.
 set clipboard=unnamed
 set tabstop=4
 set shiftwidth=4
@@ -74,10 +75,10 @@ let g:html_indent_inctags = "html,body,head,tbody"
 
 let g:blamer_enabled = 1
 
-let g:user_emmet_leader_key=',' 	"mapeando la tecla lider por una coma, con esto se completa los tag con doble coma.
+let g:user_emmet_leader_key=','     "mapeando la tecla lider por una coma, con esto se completa los tag con doble coma.
 
 "configuracion de vim-airline
-let g:airline#extensions#tabline#enabled = 1	"muestra la linea de pestaña en la que estamos buffer
+let g:airline#extensions#tabline#enabled = 1    "muestra la linea de pestaña en la que estamos buffer
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 let g:prettier#config#semi = 'false'
@@ -91,8 +92,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
+map  <Leader>f <Plug>(easymotion-s2)
+nmap <Leader>f <Plug>(easymotion-s2)
 map  <Leader>t <Plug>(easymotion-bd-w)
 nmap <Leader>t <Plug>(easymotion-overwin-w)
 map <Leader>bu :Buffers<cr>
@@ -104,7 +105,14 @@ map <F3> <C-\\><C-n>
 map <TAB> :tabnext<CR>
 map <S-TAB> :tabNext<CR>
 
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
 set termguicolors
 "colorscheme nord 
 "colorscheme dogrun
 colorscheme gotham
+let g:ale_linters = { 'javascript': ['eslint'], 'typescript': ['eslint'] }
+let g:ale_fixers = { 'javascript': ['eslint'], 'typescript': ['eslint'] }
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+let g:ale_fix_on_save = 1
